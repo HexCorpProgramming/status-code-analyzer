@@ -1,0 +1,10 @@
+# Python
+env/
+__pycache__
+
+data/
+
+.vscode/
+
+# logs
+ai.log*
