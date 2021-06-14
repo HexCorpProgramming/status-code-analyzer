@@ -1,15 +1,19 @@
-import discord
-import sys
 import logging
-from logging import handlers
 import re
+import sys
+from datetime import date, datetime
+from logging import handlers
+
+import discord
+import pandas as pd
 from discord.ext.commands import Bot
-from datetime import datetime, date
+
 from resources import code_map
 
-import pandas as pd
-
 LOGGER = logging.getLogger('ai')
+
+CODE_PATTERN = re.compile(r'^\d{4} :: Code `(\d{3})`.*$', re.DOTALL)
+
 
 def set_up_logger():
     # Logging setup
@@ -27,9 +31,6 @@ def set_up_logger():
     logger.setLevel(logging.DEBUG)
 
 bot = Bot(command_prefix='UNUSED', case_insensitive=True, guild_subscriptions=True)
-
-
-CODE_PATTERN = re.compile(r'^\d{4} :: Code `(\d{3})`.*$', re.DOTALL)
 
 CODE_USAGE = {}
 for code in code_map.keys():
