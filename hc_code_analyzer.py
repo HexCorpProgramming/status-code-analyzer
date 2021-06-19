@@ -37,6 +37,9 @@ for code in code_map.keys():
     CODE_USAGE[code] = {}
 
 async def read_channel(channel: discord.TextChannel):
+    '''
+    Iterate over the history of one channel to find code usage.
+    '''
     reading = True
     before = datetime.now()
     LOGGER.info(f'beginning to read channel {channel.name}')
@@ -55,12 +58,18 @@ async def read_channel(channel: discord.TextChannel):
                 add_or_increase_usage(match.group(1), message.created_at.date())
 
 def add_or_increase_usage(code: str, when: date):
+    '''
+    Creates a new entry in for the code at the given date in the usage map or, if it already exists, increases it by one.
+    '''
     if when in CODE_USAGE[code].keys():
         CODE_USAGE[code][when] = CODE_USAGE[code][when] + 1
     else:
         CODE_USAGE[code][when] = 1
 
 def write_file():
+    '''
+    Export the usage map to a spreadsheet.
+    '''
     LOGGER.info('beginning to write output file')
     with pd.ExcelWriter('data/out.ods') as writer:
         frame = pd.DataFrame(data=CODE_USAGE)
