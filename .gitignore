@@ -7,4 +7,4 @@ data/
 .vscode/
 
 # logs
-ai.log*
+status_code_analyzer.log*

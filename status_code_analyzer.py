@@ -20,7 +20,7 @@ def set_up_logger():
     formatter = logging.Formatter(fmt='%(asctime)s.%(msecs)03d :: %(levelname)s :: %(message)s', datefmt='%Y-%m-%d :: %H:%M:%S')
 
     log_file_handler = handlers.TimedRotatingFileHandler(
-        filename='ai.log', encoding='utf-8', backupCount=6, when='D', interval=7)
+        filename='status_code_analyzer.log', encoding='utf-8', backupCount=6, when='D', interval=7)
     log_file_handler.setFormatter(formatter)
 
     logging.basicConfig(level=logging.WARNING)
